@@ -31,7 +31,7 @@ int ingresaEntero(char mensaje[])
  */
 float ingresaFlotante(char mensaje[])
 {
-    int numero;
+    float numero;
     printf("%s", mensaje);
     scanf("%f", &numero);
     return numero;
@@ -66,13 +66,13 @@ void ingresaCadena(char cadena[], char mensaje[], int dimension)
 {
     puts(mensaje);
     char buffer[1024];
-    //fflush(stdin);
+    fflush(stdin);
 
     gets(buffer);
     while(strlen(buffer) >= dimension)
     {
         printf("Error. %s", mensaje);
-        //fflush(stdin);
+        fflush(stdin);
         gets(buffer);
     }
     strcpy(cadena, buffer);
