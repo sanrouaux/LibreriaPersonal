@@ -1,0 +1,39 @@
+# depslib dependency file v1.0
+1537727353 source:c:\users\sanro\onedrive\escritorio\rouauc\libreriaspersonales\funcionesaritmeticas.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funcionesAritmeticas.h"
+
+1537727526 c:\users\sanro\onedrive\escritorio\rouauc\libreriaspersonales\funcionesaritmeticas.h
+
+1537730242 source:c:\users\sanro\onedrive\escritorio\rouauc\libreriaspersonales\ingresodatos.c
+	<stdio.h>
+	<stdlib.h>
+	"ingresoDatos.h"
+
+1537730250 c:\users\sanro\onedrive\escritorio\rouauc\libreriaspersonales\ingresodatos.h
+
+1537734566 source:c:\users\sanro\onedrive\escritorio\rouauc\libreriaspersonales\validaciondatos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"validacionDatos.h"
+
+1537734566 c:\users\sanro\onedrive\escritorio\rouauc\libreriaspersonales\validaciondatos.h
+
+1537734752 source:c:\users\sanro\onedrive\escritorio\rouauc\libreriaspersonales\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"vectores.h"
+
+1537733781 c:\users\sanro\onedrive\escritorio\rouauc\libreriaspersonales\vectores.h
+
+1537734744 source:c:\users\sanro\onedrive\escritorio\rouauc\libreriaspersonales\vectores.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"vectores.h"
+	"validacionDatos.h"
+

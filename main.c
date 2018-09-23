@@ -1,15 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
-#include "libreriaPersonalC.h"
-#define T 20
+#include "vectores.h"
+
 
 int main()
 {
 
-    printf("%d", 'a' < 'b');
+    int vector[5];
+    cargaAleatoriaVectorEnteros(vector, "Ingrese una edad: ", 5, -1);
 
+    int i;
+    for(i = 0; i < 5; i++)
+    {
+        printf("%d\n", vector[i]);
+    }
 
     return 0;
 }
