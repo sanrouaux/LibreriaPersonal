@@ -37,3 +37,45 @@
 	"vectores.h"
 	"validacionDatos.h"
 
+1539979537 source:c:\users\sanro\onedrive\escritorio\biblioteca personal\libreriaspersonales\funcionesaritmeticas.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funcionesAritmeticas.h"
+
+1539979537 c:\users\sanro\onedrive\escritorio\biblioteca personal\libreriaspersonales\funcionesaritmeticas.h
+
+1539985498 source:c:\users\sanro\onedrive\escritorio\biblioteca personal\libreriaspersonales\vectores.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"vectores.h"
+	"validacionDatos.h"
+
+1539984563 c:\users\sanro\onedrive\escritorio\biblioteca personal\libreriaspersonales\vectores.h
+
+1539984563 c:\users\sanro\onedrive\escritorio\biblioteca personal\libreriaspersonales\validaciondatos.h
+
+1539983756 source:c:\users\sanro\onedrive\escritorio\biblioteca personal\libreriaspersonales\validaciondatos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"validacionDatos.h"
+
+1539984312 source:c:\users\sanro\onedrive\escritorio\biblioteca personal\libreriaspersonales\ingresodatos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ingresoDatos.h"
+
+1539984563 c:\users\sanro\onedrive\escritorio\biblioteca personal\libreriaspersonales\ingresodatos.h
+
+1539984312 source:c:\users\sanro\onedrive\escritorio\biblioteca personal\libreriaspersonales\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"vectores.h"
+	"ingresoDatos.h"
+	"validacionDatos.h"
+

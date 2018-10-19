@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "ingresoDatos.h"
 
 
@@ -9,12 +10,23 @@
  * \return int número ingresado por el usuario
  *
  */
-int ingresaEntero(char mensaje[])
+int ingresaEntero(char mensaje[], char mensajeErrorLargo[], char cadena[], int tam)
 {
-    int numero;
+    char buffer[1024];
+
     printf("%s", mensaje);
-    scanf("%d", &numero);
-    return numero;
+    fflush(stdin);
+    gets(buffer);
+
+    while(strlen(buffer) >= tam)
+    {
+        printf("%s", mensajeErrorLargo);
+        fflush(stdin);
+        gets(buffer);
+    }
+    strcpy(cadena, buffer);
+
+    return 0;
 }
 
 
@@ -43,6 +55,28 @@ char ingresaCaracter(char mensaje[])
 {
     char caracter;
     printf("%s", mensaje);
+    fflush(stdin);
     scanf("%c", &caracter);
     return caracter;
+}
+
+
+/** \brief
+ *
+ * \return char
+ *
+ */
+char pideYValidaSiNo()
+{
+    char letra;
+    fflush(stdin);
+    letra = getchar();
+
+    while(letra != 's' && letra != 'n')
+    {
+        puts("Ingrese una opcion correcta: s/n");
+        fflush(stdin);
+        letra = getchar();
+    }
+    return letra;
 }

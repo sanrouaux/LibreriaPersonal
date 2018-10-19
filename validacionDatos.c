@@ -13,11 +13,12 @@
  * \return int el numero elegido ya validado
  *
  */
-int validaMaximoMinimoEnteros(int numero, int maximo, int minimo, char mensaje[])
+int validaRangoEnteros(int numero, int max, int min)
 {
-    while(numero < minimo || numero > maximo)
+    while(numero < min || numero > max)
     {
-        puts(mensaje);
+        puts("Fuera de rango. Ingrese nuevamente: ");
+        fflush(stdin);
         scanf("%d", &numero);
     }
     return numero;
@@ -38,6 +39,7 @@ float validaMaximoMinimoFlotantes(float numero, float maximo, float minimo, char
     while(numero < minimo || numero > maximo)
     {
         puts(mensaje);
+        fflush(stdin);
         scanf("%f", &numero);
     }
     return numero;
@@ -51,18 +53,38 @@ float validaMaximoMinimoFlotantes(float numero, float maximo, float minimo, char
  * \return int retorna '1' si la comprobacion es positivo: '0' si es negativa
  *
  */
-int compruebaNumerico(char cadena[], int tam)
+int validaSoloNumeros(char cadena[], int largoMaximo)
 {
-    int respuesta = 1;
-    int i;
-    for(i = 0 ; i < tam-1; i++)
+    int numeroValido;
+    int caracterInvalido;
+    int largoCadena;
+    char buffer[1024];
+
+    do
     {
-        if(cadena[i] < '0' || cadena[i] > '9')
+        caracterInvalido = 0;
+        largoCadena = strlen(cadena);
+        int i;
+        for(i=0; i<largoCadena; i++)
         {
-            respuesta = 0;
+            if(cadena[i] < 48 || cadena[i] > 57)
+            {
+                caracterInvalido = 1;
+            }
+        }
+
+        if(caracterInvalido == 1)
+        {
+            puts("\nIngreso un caracter invalido. Ingrese el numero nuevamente: ");
+            fflush(stdin);
+            gets(buffer);
+            validaLargoCadena(buffer, largoMaximo);
+            strcpy(cadena, buffer);
         }
     }
-    return respuesta;
+    while(caracterInvalido == 1);
+    numeroValido = atoi(cadena);
+    return numeroValido;
 }
 
 
@@ -73,20 +95,41 @@ int compruebaNumerico(char cadena[], int tam)
  * \return int devuelve '1' si la comprobacion es positiva; '0' si es negativa
  *
  */
-int compruebaAlfabetico(char cadena[], int tam)
+int validaSoloLetras(char cadena[], int largoMaximo)
 {
-    int respuesta = 1;
+
+    int largoCadena;
+    int caracterInvalido;
+    char buffer[1024];
+
     int i;
-    for(i = 0; i < tam-1; i++)
+    do
     {
-        if((cadena[i] < 'a' || cadena[i] > 'z') && (cadena[i] < 'A' || cadena[i] > 'Z'))
+        caracterInvalido = 0;
+        largoCadena = strlen(cadena);
+
+                      for(i=0; i<largoCadena; i++)
         {
-            respuesta = 0;
+            if((cadena[i] < 'a' || cadena[i] > 'z') && (cadena[i] < 'A' || cadena[i] > 'Z') && cadena[i] != ' ')
+            {
+                caracterInvalido = 1;
+                break;
+            }
+        }
+
+        if(caracterInvalido == 1)
+        {
+            puts("Ingreso un caracter invalido. Ingrese la cadena nuevamente:");
+            fflush(stdin);
+            gets(buffer);
+            validaLargoCadena(buffer, largoMaximo);
+            strcpy(cadena, buffer);
         }
     }
-    return respuesta;
-}
+    while(caracterInvalido == 1);
 
+    return 0;
+}
 
 /** \brief comprueba si una cadena de caracteres tiene todos sus elementos alfanumericos
  *
@@ -95,11 +138,13 @@ int compruebaAlfabetico(char cadena[], int tam)
  * \return int devuelve '1' si la comprobacion es positiva; '0' si es negativa
  *
  */
-int compruebaAlfanumerico(char cadena[], int tam)
+int compruebaAlfanumerico(char cadena[])
 {
     int respuesta = 1;
+    int largo;
+    largo = strlen(cadena);
     int i;
-    for(i = 0; i < tam-1; i++)
+    for(i = 0; i < largo-1; i++)
     {
         if((cadena[i] < '0' || cadena[i] > '9') && (cadena[i] < 'a' || cadena[i] > 'z') && (cadena[i] < 'A' || cadena[i] > 'Z'))
         {
@@ -121,8 +166,38 @@ char validaSiNo(char respuesta)
 {
     while(respuesta != 's' && respuesta != 'n')
     {
-        puts("Ingrese una respuesta valida: s/n");
+        puts("No ingreso una opcion valida. Ingrese: s/n");
         fflush(stdin);
         scanf("%c", &respuesta);
     }
+    return respuesta;
+}
+
+
+
+/** \brief
+ *
+ * \param cadena[] char
+ * \param largoMaximo int
+ * \return int
+ *
+ */
+int validaLargoCadena(char cadena[], int largoMaximo)
+{
+    while(strlen(cadena) >= largoMaximo || strlen(cadena) == 0)
+    {
+        if(strlen(cadena) == 0)
+        {
+            puts("No ingreso ningun caracter. Ingrese nuevamente: ");
+            fflush(stdin);
+            gets(cadena);
+        }
+        else
+        {
+            puts("Nombre demasiado largo. Ingrese otro: ");
+            fflush(stdin);
+            gets(cadena);
+        }
+    }
+    return 0;
 }

@@ -1,6 +1,7 @@
-int validaMaximoMinimoEnteros(int, int, int, char[]);
+int validaRangoEnteros(int, int, int);
 float validaMaximoMinimoFlotantes(float, float, float, char[]);
-int compruebaNumerico(char[], int);
-int compruebaAlfabetico(char[], int);
-int compruebaAlfanumerico(char[], int);
+int validaSoloNumeros(char cadena[], int largoMaximo);
+int validaSoloLetras(char[], int);
+int compruebaAlfanumerico(char[]);
 char validaSiNo(char);
+int validaLargoCadena(char cadena[], int largoMaximo);
