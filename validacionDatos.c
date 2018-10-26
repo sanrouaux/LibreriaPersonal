@@ -49,109 +49,80 @@ float validaMaximoMinimoFlotantes(float numero, float maximo, float minimo, char
 /** \brief comprueba si una cadena de caracteres tiene todos sus elementos numericos
  *
  * \param cadena[] char cadena a analizar
- * \param tam int tamano del vector
- * \return int retorna '1' si la comprobacion es positivo: '0' si es negativa
+ * \return int retorna '1' si la comprobacion es positivo, '0' si es negativa
  *
  */
-int validaSoloNumeros(char cadena[], int largoMaximo)
+int validaSoloNumeros(char* cadena)
 {
-    int numeroValido;
-    int caracterInvalido;
-    int largoCadena;
-    char buffer[1024];
+    int retorno = 1;
 
-    do
+    int largo;
+    largo = strlen(cadena);
+
+    int i;
+    for(i=0; i<largo; i++)
     {
-        caracterInvalido = 0;
-        largoCadena = strlen(cadena);
-        int i;
-        for(i=0; i<largoCadena; i++)
+        if(cadena[i] < 48 || cadena[i] > 57)
         {
-            if(cadena[i] < 48 || cadena[i] > 57)
-            {
-                caracterInvalido = 1;
-            }
-        }
-
-        if(caracterInvalido == 1)
-        {
-            puts("\nIngreso un caracter invalido. Ingrese el numero nuevamente: ");
-            fflush(stdin);
-            gets(buffer);
-            validaLargoCadena(buffer, largoMaximo);
-            strcpy(cadena, buffer);
+             retorno = 0;
+             break;
         }
     }
-    while(caracterInvalido == 1);
-    numeroValido = atoi(cadena);
-    return numeroValido;
+    return retorno;
 }
 
 
 /** \brief comprueba si una cadena de caracteres tiene todos sus elementos alfabeticos
  *
  * \param char[] cadena a ser evaluada
- * \param int tamano del vector
  * \return int devuelve '1' si la comprobacion es positiva; '0' si es negativa
  *
  */
-int validaSoloLetras(char cadena[], int largoMaximo)
+int validaSoloLetras(char* cadena)
 {
 
-    int largoCadena;
-    int caracterInvalido;
-    char buffer[1024];
+    int retorno = 1;
+
+    int largo;
+    largo = strlen(cadena);
 
     int i;
-    do
+    for(i=0; i<largo; i++)
     {
-        caracterInvalido = 0;
-        largoCadena = strlen(cadena);
-
-                      for(i=0; i<largoCadena; i++)
+        if((cadena[i] < 'a' || cadena[i] > 'z') && (cadena[i] < 'A' || cadena[i] > 'Z') && cadena[i] != ' ')
         {
-            if((cadena[i] < 'a' || cadena[i] > 'z') && (cadena[i] < 'A' || cadena[i] > 'Z') && cadena[i] != ' ')
-            {
-                caracterInvalido = 1;
-                break;
-            }
-        }
-
-        if(caracterInvalido == 1)
-        {
-            puts("Ingreso un caracter invalido. Ingrese la cadena nuevamente:");
-            fflush(stdin);
-            gets(buffer);
-            validaLargoCadena(buffer, largoMaximo);
-            strcpy(cadena, buffer);
+             retorno = 0;
+             break;
         }
     }
-    while(caracterInvalido == 1);
-
-    return 0;
+    return retorno;
 }
+
 
 /** \brief comprueba si una cadena de caracteres tiene todos sus elementos alfanumericos
  *
  * \param char[] cadena a ser evaluada
- * \param int tamano del vector
  * \return int devuelve '1' si la comprobacion es positiva; '0' si es negativa
  *
  */
-int compruebaAlfanumerico(char cadena[])
+int compruebaAlfanumerico(char* cadena)
 {
-    int respuesta = 1;
+    int retorno = 1;
+
     int largo;
     largo = strlen(cadena);
+
     int i;
     for(i = 0; i < largo-1; i++)
     {
-        if((cadena[i] < '0' || cadena[i] > '9') && (cadena[i] < 'a' || cadena[i] > 'z') && (cadena[i] < 'A' || cadena[i] > 'Z'))
+        if((cadena[i] < '0' || cadena[i] > '9') && (cadena[i] < 'a' || cadena[i] > 'z')
+           && (cadena[i] < 'A' || cadena[i] > 'Z'))
         {
-            respuesta = 0;
+            retorno= 0;
+            break;
         }
     }
-    return respuesta;
+    return retorno;
 }
 
 
@@ -175,29 +146,19 @@ char validaSiNo(char respuesta)
 
 
 
-/** \brief
+/** \brief Mide el largo de una cadena de caracteres
  *
- * \param cadena[] char
- * \param largoMaximo int
- * \return int
+ * \param cadena[] char Cadena a ser medida
+ * \param largoMaximo int Largo maximo que puede tener la cadena, incluyendo al caracter de cierre
+ * \return int Retorna 1 si el largo es valido, y 0 si el largo no es valido o no se introdujeron caracteres
  *
  */
 int validaLargoCadena(char cadena[], int largoMaximo)
 {
-    while(strlen(cadena) >= largoMaximo || strlen(cadena) == 0)
+    int retorno = 1;
+    if(strlen(cadena) >= largoMaximo || strlen(cadena) == 0)
     {
-        if(strlen(cadena) == 0)
-        {
-            puts("No ingreso ningun caracter. Ingrese nuevamente: ");
-            fflush(stdin);
-            gets(cadena);
-        }
-        else
-        {
-            puts("Nombre demasiado largo. Ingrese otro: ");
-            fflush(stdin);
-            gets(cadena);
-        }
+        retorno = 0;
     }
-    return 0;
+    return retorno;
 }

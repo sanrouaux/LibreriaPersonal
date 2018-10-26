@@ -19,8 +19,8 @@ void ingresaCadena(char cadena[], char mensaje[], int dimension)
     puts(mensaje);
     char buffer[1024];
     fflush(stdin);
-
     gets(buffer);
+
     while(strlen(buffer) >= dimension)
     {
         printf("Error. %s", mensaje);
