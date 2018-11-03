@@ -5,8 +5,8 @@
 #include "validacionDatos.h"
 
 
-/** \brief pide un numero al usuario, valida que esté dentro del rango de un entero, que no haya caracteres
- *         que no sean numeros y que el numero entre dentro de un rango establecido por el usuario
+/** \brief pide un numero al usuario, valida que esté dentro del rango de un int, que no haya caracteres
+ *         que no sean numericos y que el numero entre dentro de un rango establecido por el usuario
  *
  * \param mensaje[] char mensaje que será mostrado al usuario
  * \param max int Numero maximo que puede aceptar la funcion
@@ -18,10 +18,9 @@ int ingresaEntero(char mensaje[], int max, int min)
 {
     int numero;
     char buffer[6];
-    int i;
 
     int banderaLargo;
-    int banderaCaracterInvalido;
+    int banderaSoloNumeros;
     int banderaRango;
 
     printf("%s", mensaje);
@@ -30,44 +29,37 @@ int ingresaEntero(char mensaje[], int max, int min)
 
     do
     {
-        banderaCaracterInvalido = 0;
+        banderaSoloNumeros = 0;
         banderaLargo = 0;
         banderaRango = 0;
 
-        if(strlen(buffer) >= 6)
+        if(validaSoloNumeros(buffer) == 0)
+        {
+            banderaSoloNumeros = 1;
+            puts("Error. Ingreso caracteres invalidos.");
+        }
+
+        if(banderaSoloNumeros == 0 && validaLargoCadena(buffer, 6) == 0)
         {
             banderaLargo = 1;
             puts("Error. Demasiados digitos.");
         }
-        else
+
+        numero = atoi(buffer);
+        if(banderaSoloNumeros == 0 && banderaLargo == 0 && validaRangoEntero(numero, max, min) == 0)
         {
-            numero = atoi(buffer);
-            if(numero < min || numero > max)
-            {
-                banderaRango = 1;
-                puts("Error. El numero ingresado esta fuera de rango.");
-            }
+            banderaRango = 1;
+            puts("Error. Numero fuera de rango.");
         }
 
-        for(i=0; i<strlen(buffer); i++)
-        {
-            if((buffer[i] < '0' || buffer[i] > '9') && buffer[i] != '-')
-            {
-                banderaCaracterInvalido = 1;
-                puts("Error. Ingreso caracteres invalidos.");
-                break;
-            }
-        }
-
-        if(banderaCaracterInvalido == 1 || banderaLargo == 1 || banderaRango == 1)
+        if(banderaSoloNumeros == 1 || banderaLargo == 1 || banderaRango == 1)
         {
             puts("Ingrese el numero nuevamente: ");
             fflush(stdin);
             gets(buffer);
         }
-
     }
-    while(banderaCaracterInvalido == 1 || banderaLargo == 1 || banderaRango == 1);
+    while(banderaSoloNumeros == 1 || banderaLargo == 1 || banderaRango == 1);
 
     return numero;
 }
@@ -82,8 +74,21 @@ int ingresaEntero(char mensaje[], int max, int min)
 float ingresaFlotante(char mensaje[])
 {
     float numero;
+    char buffer[15];
+
     printf("%s", mensaje);
-    scanf("%f", &numero);
+    fflush(stdin);
+    gets(buffer);
+
+    while(validaSoloNumeros(buffer) == 0)
+    {
+        puts("Ingreso caracteres invalidos. Reingrese el numero: ");
+        fflush(stdin);
+        gets(buffer);
+    }
+
+    numero = atof(buffer);
+
     return numero;
 }
 

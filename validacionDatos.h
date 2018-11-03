@@ -1,7 +1,11 @@
-int validaRangoEnteros(int, int, int);
-float validaMaximoMinimoFlotantes(float, float, float, char[]);
-int validaSoloNumeros(char*, int);
-int validaSoloLetras(char[], int);
-int compruebaAlfanumerico(char[]);
-char validaSiNo(char);
 int validaLargoCadena(char cadena[], int largoMaximo);
+
+int validaRangoEntero(int, int, int);
+float validaRangoFlotante(float, float, float);
+
+int validaSoloNumeros(char*);
+int validaSoloLetras(char*);
+int validaSoloAlfanumericos(char*);
+
+int validaSiNo(char);
+

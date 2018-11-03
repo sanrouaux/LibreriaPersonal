@@ -102,7 +102,7 @@ void cargaAleatoriaVectorEnteros(int vector[], char mensaje[], int tam, int valo
     {
         printf("Eliga una posicion entre 0 y %d: ", tam-1);
         scanf("%d", &posicion);
-        posicion = validaRangoEnteros(posicion, tam-1, 0);
+        posicion = validaRangoEntero(posicion, tam-1, 0);
 
         if(vector[posicion] != valorIlogico)
         {
