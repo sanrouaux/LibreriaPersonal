@@ -8,18 +8,23 @@
  *
  * \param cadena[] char Cadena a ser medida
  * \param largoMaximo int Largo maximo que puede tener la cadena, incluyendo al caracter de cierre
- * \return int retorna 1 si el largo es valido, y 0 si el largo no es valido o no se introdujeron caracteres
+ * \return int retorna 1 si el largo es valido, y 0 si el largo no es valido, y -1 si no se introdujeron caracteres
  *
  */
 int validaLargoCadena(char* cadena, int largoMaximo)
 {
     int retorno = 1;
-    if(strlen(cadena) >= largoMaximo || strlen(cadena) == 0)
+    if(strlen(cadena) >= largoMaximo)
     {
         retorno = 0;
     }
+    else if(strlen(cadena) == 0)
+    {
+        retorno = -1;
+    }
     return retorno;
 }
+
 
 
 

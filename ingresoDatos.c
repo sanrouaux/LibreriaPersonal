@@ -17,13 +17,13 @@
 int ingresaEntero(char mensaje[], int max, int min)
 {
     int numero;
-    char buffer[6];
+    char buffer[11];
 
     int banderaLargo;
     int banderaSoloNumeros;
     int banderaRango;
 
-    printf("%s", mensaje);
+    puts(mensaje);
     fflush(stdin);
     gets(buffer);
 
@@ -35,21 +35,29 @@ int ingresaEntero(char mensaje[], int max, int min)
 
         if(validaSoloNumeros(buffer) == 0)
         {
-            banderaSoloNumeros = 1;
             puts("Error. Ingreso caracteres invalidos.");
+            banderaSoloNumeros = 1;
         }
 
-        if(banderaSoloNumeros == 0 && validaLargoCadena(buffer, 6) == 0)
+        if(banderaSoloNumeros == 0 && validaLargoCadena(buffer, 11) != 1)
         {
-            banderaLargo = 1;
-            puts("Error. Demasiados digitos.");
+            if(validaLargoCadena(buffer, 11)==0)
+            {
+                 puts("Error. Demasiados digitos.");
+                 banderaLargo = 1;
+            }
+            else
+            {
+                puts("Error. No se introdujo ningun digito.");
+                banderaLargo = 1;
+            }
         }
 
         numero = atoi(buffer);
         if(banderaSoloNumeros == 0 && banderaLargo == 0 && validaRangoEntero(numero, max, min) == 0)
         {
-            banderaRango = 1;
             puts("Error. Numero fuera de rango.");
+            banderaRango = 1;
         }
 
         if(banderaSoloNumeros == 1 || banderaLargo == 1 || banderaRango == 1)
@@ -127,4 +135,78 @@ char pideYValidaSiNo()
         letra = getchar();
     }
     return letra;
+}
+
+
+int ingresaCadena(char cadena[], char mensaje[], int largo)
+{
+    char buffer[1024];
+    int validacion;
+
+    puts(mensaje);
+    gets(buffer);
+
+    validacion = validaLargoCadena(buffer, largo);
+
+    while(validacion != 1)
+    {
+        if(validacion == 0)
+        {
+            puts("Demasiados carcateres. Ingrese nuevamente");
+            fflush(stdin);
+            gets(buffer);
+            validacion = validaLargoCadena(buffer, largo);
+        }
+        else
+        {
+            puts("No ingreso ningun caracter. Ingrese nuevamente");
+            fflush(stdin);
+            gets(buffer);
+            validacion = validaLargoCadena(buffer, largo);
+        }
+    }
+    strcpy(cadena, buffer);
+    return 0;
+}
+
+
+int ingresaCadenaSoloLetras(char cadena[], char mensaje[], int largo)
+{
+    char buffer[1024];
+    int validacionLargo;
+    int validacionCaracteres;
+
+    puts(mensaje);
+    fflush(stdin);
+    gets(buffer);
+
+    validacionLargo = validaLargoCadena(buffer, largo);
+    validacionCaracteres = validaSoloLetras(buffer);
+
+    while(validacionLargo != 1 || validacionCaracteres != 1)
+    {
+        if(validacionLargo == 0)
+        {
+            puts("Demasiados carcateres");
+        }
+
+        if(validacionLargo == -1)
+        {
+            puts("No ingreso ningun caracter");
+        }
+
+        if(validacionCaracteres == 0)
+        {
+            puts("Ingreso caracteres invalidos");
+        }
+
+        puts("Ingrese nuevamente: ");
+        fflush(stdin);
+        gets(buffer);
+        validacionLargo = validaLargoCadena(buffer, largo);
+        validacionCaracteres = validaSoloLetras(buffer);
+    }
+
+    strcpy(cadena, buffer);
+    return 0;
 }
