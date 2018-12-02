@@ -1,7 +1,6 @@
-int ubicaMayusculasYMinusculas(char cadena[]);
+int ubicaMayusculasYMinusculas(char* cadena);
+int ordenaVectorNumerico_Burbujeo(int* vector, int tam);
+int ordenaVectorNumerico_Insertion(int* vector, int tam);
 
-void cargaSecuencialVectorEnteros(int[], char[], int);
-void cargaAleatoriaVectorEnteros(int[], char[], int, int);
-void ingresaArrayDeCadenas(char[][50], char[], int);
+int ordenaMatrizAlfabeticamente_Burbujeo(char arrayCadenas[][50], int filas);
 
-int ordenaVectorNumerico(int vector[],int tam);

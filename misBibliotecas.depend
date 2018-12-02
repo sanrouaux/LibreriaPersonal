@@ -1,0 +1,44 @@
+# depslib dependency file v1.0
+1540070170 source:c:\users\sanro\onedrive\escritorio\misbibliotecas\funcionesaritmeticas.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funcionesAritmeticas.h"
+
+1540070170 c:\users\sanro\onedrive\escritorio\misbibliotecas\funcionesaritmeticas.h
+
+1543752196 source:c:\users\sanro\onedrive\escritorio\misbibliotecas\validaciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"validaciones.h"
+
+1543756338 c:\users\sanro\onedrive\escritorio\misbibliotecas\validaciones.h
+
+1543758704 source:c:\users\sanro\onedrive\escritorio\misbibliotecas\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ordenamiento.h"
+	"ingresoDatos.h"
+	"validaciones.h"
+
+1543758704 c:\users\sanro\onedrive\escritorio\misbibliotecas\ordenamiento.h
+
+1543756338 c:\users\sanro\onedrive\escritorio\misbibliotecas\ingresodatos.h
+
+1543756363 source:c:\users\sanro\onedrive\escritorio\misbibliotecas\ingresodatos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ingresoDatos.h"
+	"validaciones.h"
+
+1543757464 source:c:\users\sanro\onedrive\escritorio\misbibliotecas\ordenamiento.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"ordenamiento.h"
+	"validaciones.h"
+

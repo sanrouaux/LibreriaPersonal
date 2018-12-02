@@ -1,5 +1,4 @@
 int validaLargoCadena(char* cadena, int largoMaximo);
-
 int validaRangoEntero(int numero, int max, int min);
 float validaRangoFlotante(float numero, float max, float min);
 

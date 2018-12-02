@@ -53,10 +53,10 @@ int pideYValidaEntero(char mensaje[], int max, int min)
 /** \brief pide un numero flotante al usuario, valida que todos los caracteres sean numericos, que se haya introducido
  *         al menos un caracter y que el numero esté dentro de un rango establecido por el usuario
  *
- * \param mensaje[] char mensaje que será mostrado al usuario
+ * \param mensaje[] char Mensaje que será mostrado al usuario
  * \param max float Numero maximo que puede aceptar la funcion
  * \param min float Numero minimo que acepta la funcion
- * \return float número ingresado por el usuario
+ * \return float Número ingresado por el usuario
  *
  */
 float pideYValidaFlotante (char mensaje[], float max, float min)
@@ -95,22 +95,6 @@ float pideYValidaFlotante (char mensaje[], float max, float min)
 }
 
 
-/** \brief pide un carcater al usuario y lo retorna
- *
- * \param mensaje[] char mensaje que será mostrado al usuario
- * \return char caracter ingresado por el usuario
- *
- */
-char ingresaUnCaracter(char mensaje[])
-{
-    char caracter;
-    puts(mensaje);
-    fflush(stdin);
-    scanf("%c", &caracter);
-    return caracter;
-}
-
-
 /** \brief Recibe el ingreso de 's' o 'n' por parte del usuario y lo valida
  *
  * \return char Caracter ingresado por el usuario
@@ -130,6 +114,97 @@ char pideYValidaSiNo()
         letra = getchar();
     }
     return letra;
+}
+
+
+/** \brief Pide un carcater al usuario y lo retorna
+ *
+ * \param mensaje[] char Mensaje que será mostrado al usuario
+ * \return char Caracter ingresado por el usuario
+ *
+ */
+char pideUnCaracter(char mensaje[])
+{
+    char caracter;
+    puts(mensaje);
+    fflush(stdin);
+    scanf("%c", &caracter);
+    return caracter;
+}
+
+
+/** \brief Pide secuencialmente el ingreso de numeros enteros hasta completar el vector
+ *
+ * \param int[] Puntero al vector a ser  cargado
+ * \param char[] Mensaje que se mostrara al usuario
+ * \param int Tamano del vector
+ * \return void
+ *
+ */
+void cargaSecuencialVectorEnteros(char mensaje[], int* vector, int tam)
+{
+    int i;
+    for(i = 0; i < tam; i++)
+    {
+        printf(mensaje);
+        scanf("%d", &vector[i]);
+    }
+}
+
+
+/** \brief Permite cargar valores en un vector en una posicion a eleccion del usuario, mientras este lo desee
+ *
+ * \param int[] Vector a completar
+ * \param char[] Mensaje de pedido de valor
+ * \param int Tamano del vector
+ * \param int Valor ilogico en relacion a la informacion que llenara el vector
+ * \return void
+ *
+ */
+void cargaAleatoriaVectorEnteros(char mensaje[], int* vector, int tam, int valorIlogico)
+{
+    int i;
+    for(i =0; i < tam; i++)
+    {
+        vector[i] = valorIlogico;
+    }
+
+    int posicion;
+    char reemplazo;
+    char seguir;
+
+    do
+    {
+        printf("Eliga una posicion entre 0 y %d: ", tam-1);
+        scanf("%d", &posicion);
+        posicion = validaRangoEntero(posicion, tam-1, 0);
+
+        if(vector[posicion] != valorIlogico)
+        {
+            printf("Ya se ha guardado un valor en esta posicion. Desea reemplazarlo? s/n");
+            fflush(stdin);
+            scanf("%c", &reemplazo);
+            reemplazo = validaSiNo(reemplazo);
+
+            if(reemplazo == 's')
+            {
+                puts(mensaje);
+                scanf("%d", &vector[posicion]);
+            }
+        }
+        else
+        {
+            puts(mensaje);
+            scanf("%d", &vector[posicion]);
+        }
+
+        puts("Desea ingresar otro valor? s/n");
+        fflush(stdin);
+        scanf("%c", &seguir);
+        validaSiNo(seguir);
+
+    }
+    while(seguir == 's');
 }
 
 
@@ -168,6 +243,35 @@ int ingresaCadena(char mensaje[], char* cadena, int largo)
 
     strcpy(cadena, buffer);
     return 0;
+}
+
+
+
+/** \brief Permite ingresar secuencialmente cadenas de caracteres
+ *
+ * \param char[][50] vector en que se alojaran las cadenas
+ * \param int cantidad de filas del vector
+ * \return void
+ *
+ */
+void ingresaArrayDeCadenas(char mensaje[], char listadoCadenas[][50], int filas)
+{
+    char buffer[1024];
+
+    int i;
+    for(i = 0; i < filas; i++)
+    {
+        puts(mensaje);
+        gets(buffer);
+
+        while(strlen(buffer) > 49)
+        {
+            puts("Error: la cadena desborda el espacio disponible. ");
+            puts(mensaje);
+            gets(buffer);
+        }
+        strcpy(listadoCadenas[i], buffer);
+    }
 }
 
 
