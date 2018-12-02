@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include "ingresoDatos.h"
-#include "validacionDatos.h"
+#include "validaciones.h"
 
 
-/** \brief pide un numero al usuario, valida que esté dentro del rango de un int, que no haya caracteres
- *         que no sean numericos y que el numero entre dentro de un rango establecido por el usuario
+/** \brief pide un numero al usuario, valida que no haya caracteres que no sean numericos, que se haya introducido
+ *         al menos un caracter y que el numero entre dentro de un rango establecido por el usuario
  *
  * \param mensaje[] char mensaje que será mostrado al usuario
  * \param max int Numero maximo que puede aceptar la funcion
@@ -14,89 +14,83 @@
  * \return int número ingresado por el usuario
  *
  */
-int ingresaEntero(char mensaje[], int max, int min)
+int pideYValidaEntero(char mensaje[], int max, int min)
 {
     int numero;
-    char buffer[11];
-
-    int banderaLargo;
-    int banderaSoloNumeros;
-    int banderaRango;
+    char buffer[12];
 
     puts(mensaje);
     fflush(stdin);
     gets(buffer);
 
-    do
+    while(validaSoloNumeros(buffer) == 0 || strlen(buffer) == 0 || validaRangoEntero(atoi(buffer), max, min) == 0)
     {
-        banderaSoloNumeros = 0;
-        banderaLargo = 0;
-        banderaRango = 0;
-
         if(validaSoloNumeros(buffer) == 0)
         {
             puts("Error. Ingreso caracteres invalidos.");
-            banderaSoloNumeros = 1;
         }
 
-        if(banderaSoloNumeros == 0 && validaLargoCadena(buffer, 11) != 1)
+        if(strlen(buffer) == 0)
         {
-            if(validaLargoCadena(buffer, 11)==0)
-            {
-                 puts("Error. Demasiados digitos.");
-                 banderaLargo = 1;
-            }
-            else
-            {
-                puts("Error. No se introdujo ningun digito.");
-                banderaLargo = 1;
-            }
+            puts("Error. No se introdujo ningun digito.");
         }
 
-        numero = atoi(buffer);
-        if(banderaSoloNumeros == 0 && banderaLargo == 0 && validaRangoEntero(numero, max, min) == 0)
+        if(validaSoloNumeros(buffer) == 1 && strlen(buffer) != 0 && validaRangoEntero(atoi(buffer), max, min) == 0)
         {
             puts("Error. Numero fuera de rango.");
-            banderaRango = 1;
         }
 
-        if(banderaSoloNumeros == 1 || banderaLargo == 1 || banderaRango == 1)
-        {
-            puts("Ingrese el numero nuevamente: ");
-            fflush(stdin);
-            gets(buffer);
-        }
+        puts("Ingrese el numero nuevamente: ");
+        fflush(stdin);
+        gets(buffer);
     }
-    while(banderaSoloNumeros == 1 || banderaLargo == 1 || banderaRango == 1);
 
+    numero = atoi(buffer);
     return numero;
 }
 
 
-/** \brief pide un numero al usuario y lo retorna
+/** \brief pide un numero flotante al usuario, valida que todos los caracteres sean numericos, que se haya introducido
+ *         al menos un caracter y que el numero esté dentro de un rango establecido por el usuario
  *
  * \param mensaje[] char mensaje que será mostrado al usuario
+ * \param max float Numero maximo que puede aceptar la funcion
+ * \param min float Numero minimo que acepta la funcion
  * \return float número ingresado por el usuario
  *
  */
-float ingresaFlotante(char mensaje[])
+float pideYValidaFlotante (char mensaje[], float max, float min)
 {
     float numero;
     char buffer[15];
 
-    printf("%s", mensaje);
+    puts(mensaje);
     fflush(stdin);
     gets(buffer);
 
-    while(validaSoloNumeros(buffer) == 0)
+    while(validaSoloNumeros(buffer) == 0 || strlen(buffer) == 0 || validaRangoFlotante(atof(buffer), max, min) == 0)
     {
-        puts("Ingreso caracteres invalidos. Reingrese el numero: ");
+        if(validaSoloNumeros(buffer) == 0)
+        {
+            puts("Error. Ingreso caracteres invalidos.");
+        }
+
+        if(strlen(buffer) == 0)
+        {
+            puts("Error. No se introdujo ningun digito.");
+        }
+
+        if(validaSoloNumeros(buffer) == 1 && validaSoloNumeros(buffer) != 0 && validaRangoFlotante(atof(buffer), max, min) == 0)
+        {
+            puts("Error. Numero fuera de rango.");
+        }
+
+        puts("Ingrese el numero nuevamente: ");
         fflush(stdin);
         gets(buffer);
     }
 
     numero = atof(buffer);
-
     return numero;
 }
 
@@ -107,30 +101,31 @@ float ingresaFlotante(char mensaje[])
  * \return char caracter ingresado por el usuario
  *
  */
-char ingresaCaracter(char mensaje[])
+char ingresaUnCaracter(char mensaje[])
 {
     char caracter;
-    printf("%s", mensaje);
+    puts(mensaje);
     fflush(stdin);
     scanf("%c", &caracter);
     return caracter;
 }
 
 
-/** \brief
+/** \brief Recibe el ingreso de 's' o 'n' por parte del usuario y lo valida
  *
- * \return char
+ * \return char Caracter ingresado por el usuario
  *
  */
 char pideYValidaSiNo()
 {
     char letra;
+
     fflush(stdin);
     letra = getchar();
 
     while(letra != 's' && letra != 'n')
     {
-        puts("Ingrese una opcion correcta: s/n");
+        puts("Error. Ingrese una opcion correcta: s/n");
         fflush(stdin);
         letra = getchar();
     }
@@ -138,64 +133,74 @@ char pideYValidaSiNo()
 }
 
 
-int ingresaCadena(char cadena[], char mensaje[], int largo)
+/** \brief Pide al usuario una cadena de caracteres; valida que se haya ingresado al menos un caracter y que el largo
+ *         no exceda al permitido
+ *
+ * \param mensaje[] char Mensaje que se mostrará al usuario
+ * \param cadena char* Puntero al lugar donde se guardará la cadena
+ * \param largo int Largo máximo permitido
+ * \return int [0]
+ *
+ */
+int ingresaCadena(char mensaje[], char* cadena, int largo)
 {
     char buffer[1024];
-    int validacion;
 
     puts(mensaje);
     gets(buffer);
 
-    validacion = validaLargoCadena(buffer, largo);
-
-    while(validacion != 1)
+    while(validaLargoCadena(buffer, largo) != 1)
     {
-        if(validacion == 0)
+        if(validaLargoCadena(buffer, largo) == 0)
         {
             puts("Demasiados carcateres. Ingrese nuevamente");
-            fflush(stdin);
-            gets(buffer);
-            validacion = validaLargoCadena(buffer, largo);
         }
-        else
+
+        if(validaLargoCadena(buffer, largo) == -1)
         {
             puts("No ingreso ningun caracter. Ingrese nuevamente");
-            fflush(stdin);
-            gets(buffer);
-            validacion = validaLargoCadena(buffer, largo);
+
         }
+
+        fflush(stdin);
+        gets(buffer);
     }
+
     strcpy(cadena, buffer);
     return 0;
 }
 
 
-int ingresaCadenaSoloLetras(char cadena[], char mensaje[], int largo)
+/** \brief Pide al usuario una cadena de caracteres; valida que se haya ingresado al menos un caracter, que el largo de la cadena
+ *         no exceda al permitido y que se haya introducido solamente caracterers alfabeticos
+ *
+ * \param mensaje[] char Mensaje que se mostrará al usuario
+ * \param cadena char* Puntero al lugar donde se guardará la cadena
+ * \param largo int Largo máximo permitido
+ * \return int [0]
+ *
+ */
+int ingresaCadenaSoloLetras(char mensaje[], char* cadena, int largo)
 {
     char buffer[1024];
-    int validacionLargo;
-    int validacionCaracteres;
 
     puts(mensaje);
     fflush(stdin);
     gets(buffer);
 
-    validacionLargo = validaLargoCadena(buffer, largo);
-    validacionCaracteres = validaSoloLetras(buffer);
-
-    while(validacionLargo != 1 || validacionCaracteres != 1)
+    while(validaLargoCadena(buffer, largo) != 1 || validaSoloLetras(buffer) != 1)
     {
-        if(validacionLargo == 0)
+        if(validaLargoCadena(buffer, largo) == 0)
         {
-            puts("Demasiados carcateres");
+            puts("Demasiados caracteres");
         }
 
-        if(validacionLargo == -1)
+        if(validaLargoCadena(buffer, largo) == -1)
         {
             puts("No ingreso ningun caracter");
         }
 
-        if(validacionCaracteres == 0)
+        if(validaSoloLetras(buffer) == 0)
         {
             puts("Ingreso caracteres invalidos");
         }
@@ -203,8 +208,94 @@ int ingresaCadenaSoloLetras(char cadena[], char mensaje[], int largo)
         puts("Ingrese nuevamente: ");
         fflush(stdin);
         gets(buffer);
-        validacionLargo = validaLargoCadena(buffer, largo);
-        validacionCaracteres = validaSoloLetras(buffer);
+    }
+
+    strcpy(cadena, buffer);
+    return 0;
+}
+
+
+/** \brief Pide al usuario una cadena de caracteres; valida que se haya ingresado al menos un caracter, que el largo de la cadena
+ *         no exceda al permitido y que se haya introducido únicamente caracteres numéricos
+ *
+ * \param mensaje[] char Mensaje que se mostrará al usuario
+ * \param cadena char* Puntero al lugar donde se guardará la cadena
+ * \param largo int Largo máximo permitido
+ * \return int [0]
+ *
+ */
+int ingresaCadenaSoloNumeros(char mensaje[], char* cadena, int largo)
+{
+    char buffer[1024];
+
+    puts(mensaje);
+    fflush(stdin);
+    gets(buffer);
+
+    while(validaLargoCadena(buffer, largo) != 1 || validaSoloNumeros(buffer) != 1)
+    {
+        if(validaLargoCadena(buffer, largo) == 0)
+        {
+            puts("Demasiados caracteres");
+        }
+
+        if(validaLargoCadena(buffer, largo) == -1)
+        {
+            puts("No ingreso ningun caracter");
+        }
+
+        if(validaSoloNumeros(buffer) == 0)
+        {
+            puts("Ingreso caracteres invalidos");
+        }
+
+        puts("Ingrese nuevamente: ");
+        fflush(stdin);
+        gets(buffer);
+    }
+
+    strcpy(cadena, buffer);
+    return 0;
+}
+
+
+/** \brief Pide al usuario una cadena de caracteres; valida que se haya ingresado al menos un caracter, que el largo de la cadena
+ *         no exceda al permitido y que se haya introducido solamente caracterers alfanuméricos
+ *
+ * \param mensaje[] char Mensaje que se mostrará al usuario
+ * \param cadena char* Puntero al lugar donde se guardará la cadena
+ * \param largo int Largo máximo permitido
+ * \return int [0]
+ *
+ */
+int ingresaCadenaAlfanumerica(char mensaje[], char* cadena, int largo)
+{
+    char buffer[1024];
+
+    puts(mensaje);
+    fflush(stdin);
+    gets(buffer);
+
+    while(validaLargoCadena(buffer, largo) != 1 || validaSoloAlfanumericos(buffer) != 1)
+    {
+        if(validaLargoCadena(buffer, largo) == 0)
+        {
+            puts("Demasiados caracteres");
+        }
+
+        if(validaLargoCadena(buffer, largo) == -1)
+        {
+            puts("No ingreso ningun caracter");
+        }
+
+        if(validaSoloAlfanumericos(buffer) == 0)
+        {
+            puts("Ingreso caracteres invalidos");
+        }
+
+        puts("Ingrese nuevamente: ");
+        fflush(stdin);
+        gets(buffer);
     }
 
     strcpy(cadena, buffer);

@@ -53,7 +53,7 @@
 	"vectores.h"
 	"validacionDatos.h"
 
-1540070170 c:\users\sanro\onedrive\escritorio\biblioteca personal\libreriaspersonales\vectores.h
+1541292552 c:\users\sanro\onedrive\escritorio\biblioteca personal\libreriaspersonales\vectores.h
 
 1540594868 c:\users\sanro\onedrive\escritorio\biblioteca personal\libreriaspersonales\validaciondatos.h
 
@@ -78,4 +78,47 @@
 	"vectores.h"
 	"ingresoDatos.h"
 	"validacionDatos.h"
+
+1540070170 source:c:\users\sanro\onedrive\escritorio\misbibliotecas\funcionesaritmeticas.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funcionesAritmeticas.h"
+
+1540070170 c:\users\sanro\onedrive\escritorio\misbibliotecas\funcionesaritmeticas.h
+
+1543752341 source:c:\users\sanro\onedrive\escritorio\misbibliotecas\vectores.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"vectores.h"
+	"validaciones.h"
+
+1543752341 c:\users\sanro\onedrive\escritorio\misbibliotecas\vectores.h
+
+1543753172 source:c:\users\sanro\onedrive\escritorio\misbibliotecas\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"vectores.h"
+	"ingresoDatos.h"
+	"validaciones.h"
+
+1543711996 c:\users\sanro\onedrive\escritorio\misbibliotecas\ingresodatos.h
+
+1543711940 c:\users\sanro\onedrive\escritorio\misbibliotecas\validaciones.h
+
+1543752196 source:c:\users\sanro\onedrive\escritorio\misbibliotecas\validaciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"validaciones.h"
+
+1543752203 source:c:\users\sanro\onedrive\escritorio\misbibliotecas\ingresodatos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ingresoDatos.h"
+	"validaciones.h"
 

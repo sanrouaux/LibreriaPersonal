@@ -3,32 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "vectores.h"
-#include "validacionDatos.h"
-
-
-/** \brief solicita una cadena al usuario, valida que no desborde el espacio en memoria y guarda la cadena en un vector
- *
- * \param cadena[] char dirección de memoria del vector en que se guarda la cadena
- * \param mensaje[] char mensaje a ser mostrado al usuario
- * \param int dimension del vector que recibe la cadena
- * \return void
- *
- */
-void ingresaCadena(char cadena[], char mensaje[], int dimension)
-{
-    puts(mensaje);
-    char buffer[1024];
-    fflush(stdin);
-    gets(buffer);
-
-    while(strlen(buffer) >= dimension)
-    {
-        printf("Error. %s", mensaje);
-        fflush(stdin);
-        gets(buffer);
-    }
-    strcpy(cadena, buffer);
-}
+#include "validaciones.h"
 
 
 /** \brief
@@ -180,4 +155,6 @@ int ordenaVectorNumerico(int vector[],int tam) //Metodo de Insercion
         }
         vector[j+1] = auxiliar;
     }
+
+    return 0;
 }

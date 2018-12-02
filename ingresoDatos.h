@@ -1,9 +1,11 @@
-int ingresaEntero(char mensaje[], int max, int min);
-float ingresaFlotante (char mensaje[]);
-char ingresaCaracter(char mensaje[]);
+int pideYValidaEntero(char mensaje[], int max, int min);
+float pideYValidaFlotante (char mensaje[], float max, float min);
+char pideUnCaracter(char mensaje[]);
 
-char pideSiNo();
+char pideYValidaSiNo();
 
-int ingresaCadena(char[], char[], int );
-int ingresaCadenaSoloLetras(char[], char[], int);
+int ingresaCadena(char mensaje[], char* cadena, int largo); //Permite infresar cadena sin restricciones
+int ingresaCadenaSoloLetras(char mensaje[], char* cadena, int largo);
+int ingresaCadenaSoloNumeros(char mensaje[], char* cadena, int largo);
+int ingresaCadenaAlfanumerica(char mensaje[], char* cadena, int largo);
 

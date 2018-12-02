@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "validacionDatos.h"
+#include "validaciones.h"
 
 
 /** \brief valida el largo de una cadena de caracteres
@@ -14,7 +14,7 @@
 int validaLargoCadena(char* cadena, int largoMaximo)
 {
     int retorno = 1;
-    if(strlen(cadena) >= largoMaximo)
+    if(strlen(cadena) > largoMaximo)
     {
         retorno = 0;
     }
